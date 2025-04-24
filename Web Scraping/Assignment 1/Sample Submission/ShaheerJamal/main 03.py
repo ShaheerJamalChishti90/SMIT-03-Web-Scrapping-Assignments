@@ -4,8 +4,11 @@ import re
 import json
 
 url = "https://www.thriftbooks.com/browse/?12529col#b.s=mostPopular-desc&b.p=1&b.pp=50&b.col&b.f.t%5B%5D=13901&b.list"
-web = requests.get(url).content
-soup = BeautifulSoup(web, 'lxml')
+
+for page in range(1, 30):  # Adjust upper limit as needed
+    changed_url = url + str(page)
+    web = requests.get(changed_url).content
+    soup = BeautifulSoup(web, 'lxml')
 
 content = soup.find_all("script")
 string = content[12].string
