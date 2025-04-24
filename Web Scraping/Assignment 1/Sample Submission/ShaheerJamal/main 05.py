@@ -6,13 +6,13 @@ import json
 base_url = "https://www.thriftbooks.com/browse/?14644col#b.s=mostPopular-desc"
 page_size = "&b.p=1&b.pp=50&b.col&b.f.t%5B%5D=14644&b.list"
 
-for page in range(1, 100):  # Set a high maximum as safety net
+for page in range(1, 100):  
     current_url = base_url + str(page) + page_size
     web = requests.get(current_url).content
     soup = BeautifulSoup(web, 'lxml')
 
     content = soup.find_all("script")
-    if len(content) < 13:  # Check if the expected script exists
+    if len(content) < 13:  
         print(f"No more pages found. Stopped at page {page-1}")
         break
         
